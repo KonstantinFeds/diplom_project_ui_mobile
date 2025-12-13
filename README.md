@@ -1,0 +1,1 @@
+# diplom_project_ui_mobile
