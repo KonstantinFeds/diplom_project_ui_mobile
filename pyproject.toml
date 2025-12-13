@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "diplom-project-ui-mobile"
+version = "0.1.0"
+description = ""
+authors = ["konstatin fedoseev <kons.fed.99@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+pytest = "8.4.2"
+allure-pytest = "2.15.0"
+selene = "2.0.0rc9"
+python-dotenv="1.1.1"
+appium-python-client = "^5.2.4"
+requests = "^2.32.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
