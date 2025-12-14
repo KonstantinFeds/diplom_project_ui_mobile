@@ -1,7 +1,18 @@
 import os
+import shutil
+from pathlib import Path
 from dotenv import load_dotenv
 from appium.options.android import UiAutomator2Options
 import utils.file
+
+def clear_allure_results():
+    """Очищение результатов модуля allure-results"""
+    allure_dir = Path("allure-results")
+
+    if allure_dir.exists():
+        shutil.rmtree(allure_dir)
+
+    allure_dir.mkdir(exist_ok=True)
 
 
 def to_driver_options(context):
