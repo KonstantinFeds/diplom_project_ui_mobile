@@ -208,4 +208,3 @@ __marimo__/
 #creds
 .env.credentials/
 allure-results/
-tests/ui_mobile/allure-results/

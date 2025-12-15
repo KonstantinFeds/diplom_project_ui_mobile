@@ -4,14 +4,7 @@ from dotenv import load_dotenv
 from selene import browser
 import config
 import utils.allure
-from tests.pages_ui_mobile.onboarding_page import OnboardingPage
 
-
-onboarding_page = OnboardingPage()
-
-@pytest.fixture(scope='function')
-def skip_onboarding():
-    onboarding_page.skip_onboarding_button_click()
 
 
 @pytest.fixture(scope='session',autouse=True)
@@ -33,7 +26,7 @@ def pytest_configure(config):
     load_dotenv(dotenv_path=env_file_path)
 
 
-@pytest.fixture
+@pytest.fixture()
 def context(request):
     return request.config.getoption("--context")
 
@@ -50,8 +43,6 @@ def mobile_management(context):
 
     yield
 
-    # attach.add_screenshot()
-    # attach.add_xml()
     session_id = browser.driver.session_id
 
     browser.quit()
