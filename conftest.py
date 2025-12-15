@@ -4,33 +4,34 @@ from dotenv import load_dotenv
 from selene import browser
 import config
 import utils.allure
+import allure
 
 
-
-@pytest.fixture(scope='session',autouse=True)
+@pytest.fixture(scope="session")
 def clear_allure_results():
     config.clear_allure_results()
 
 
-
 def pytest_addoption(parser):
-    parser.addoption(
-        "--context", default="bstack", help="Specify the test context"
-    )
+    """добавляет опцию командной строки --context"""
+    parser.addoption("--context", default="bstack", help="Specify the test context")
 
 
 def pytest_configure(config):
+    """настройка тестового окружения на основе переданного параметра --context"""
     context = config.getoption("--context")
     env_file_path = f".env.{context}"
 
     load_dotenv(dotenv_path=env_file_path)
 
 
-@pytest.fixture()
+@pytest.fixture(scope="function")
 def context(request):
+    """возвращение контекста из командной строки"""
     return request.config.getoption("--context")
 
 
+@allure.title("настройка конфигураций для управления девайсом")
 @pytest.fixture(scope="function", autouse=True)
 def mobile_management(context):
 
@@ -45,7 +46,8 @@ def mobile_management(context):
 
     session_id = browser.driver.session_id
 
-    browser.quit()
+    with allure.step("завершение сессии"):
+        browser.quit()
 
     if context == "bstack":
         utils.allure.attach_bstack_video_android(session_id)

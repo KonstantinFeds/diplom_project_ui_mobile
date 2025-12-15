@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from appium.options.android import UiAutomator2Options
 import utils.file
 
+
 def clear_allure_results():
     """Очищение результатов модуля allure-results"""
     allure_dir = Path("allure-results")
@@ -16,8 +17,8 @@ def clear_allure_results():
 
 
 def to_driver_options(context):
+    """настройка конфигурация от переданного параметра --context"""
     options = UiAutomator2Options()
-
     if context == "local_emulator":
         options.set_capability("remote_url", os.getenv("REMOTE_URL"))
         options.set_capability("deviceName", os.getenv("DEVICE_NAME"))
@@ -33,9 +34,7 @@ def to_driver_options(context):
         options.set_capability("platformVersion", os.getenv("PLATFORM_VERSION"))
         options.set_capability("appWaitActivity", os.getenv("APP_WAIT_ACTIVITY"))
         options.set_capability("app", os.getenv("APP"))
-        load_dotenv(
-            dotenv_path=utils.file.abs_path_from_project(".env.credentials")
-        )  # загрузка переменных окружения из файла .env.credentials
+        load_dotenv(dotenv_path=utils.file.abs_path_from_project(".env.credentials"))
         options.set_capability(
             "bstack:options",
             {

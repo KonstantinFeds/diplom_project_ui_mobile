@@ -207,4 +207,6 @@ marimo/_lsp/
 __marimo__/
 #creds
 .env.credentials/
+#allure-dit
 allure-results/
+tests/ui_mobile/allure-results/

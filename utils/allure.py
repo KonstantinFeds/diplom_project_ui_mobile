@@ -2,11 +2,13 @@ import os
 import requests
 import allure
 from dotenv import load_dotenv
+import utils.file
 
 
-load_dotenv()
+load_dotenv(dotenv_path=utils.file.abs_path_from_project(".env.credentials"))
 
 
+# запись теста с bstack
 def attach_bstack_video_android(session_id):
 
     bstack_session = requests.get(
